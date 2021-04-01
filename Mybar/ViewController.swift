@@ -7,16 +7,18 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HomeController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var filter: UIButton!
     var tb : [Cocktail]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.tableFooterView = UIView()        // Do any additional setup after loading the view.
+        tableView.tableFooterView = UIView()
+        filter.layer.cornerRadius = 10
+        filter.layer.borderWidth = 1
     }
     
     override func viewWillAppear(_ animated: Bool) {

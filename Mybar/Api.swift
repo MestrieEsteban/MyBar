@@ -27,6 +27,7 @@ class Api {
     static let instance = Api()
     
     
+    
     func GetCocktail(callback: @escaping (Result<Cocktails, ApiError>) -> Void )
     {
         guard let url = URL(string: "\(baseUrl)/search.php?f=a") else { return }
