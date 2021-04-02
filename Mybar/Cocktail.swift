@@ -12,6 +12,6 @@ let drinks: [Cocktail]
 }
 
 struct Cocktail: Decodable {
-    let strGlass:String
+    let strDrink:String
     let strDrinkThumb:String
 }

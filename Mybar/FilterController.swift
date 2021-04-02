@@ -13,6 +13,7 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
     
     var data = ["Filters", "Search", "search by name", "search by letter", "List letter", "A", "B", "C", "D", "E", "F", "G", "H", "U", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
                 "T", "U", "V", "W", "X", "Y"  ]
+    var select = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,24 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
 
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.select = data[indexPath.row]
+        self.performSegue(withIdentifier: "letter", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "letter" {
+            if let HomeController = segue.destination as? HomeController {
+            if(select != "")
+            {
+                HomeController.terms = select
+
+            }
+          }
+        }
+    }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
@@ -35,7 +54,6 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
         
         if row == 0 {
         let cell = tableView.dequeueReusableCell(withIdentifier: "titleFilter", for: indexPath)
-
         return cell
         }
         
@@ -44,6 +62,8 @@ class FilterController: UIViewController, UITableViewDataSource, UITableViewDele
         let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 20)]
         cell.textLabel?.attributedText =  NSMutableAttributedString(string: data[row], attributes:attrs)
         cell.textLabel?.textAlignment = NSTextAlignment.center
+            
+            
         return cell
         }
         
