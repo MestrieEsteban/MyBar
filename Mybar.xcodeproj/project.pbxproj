@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1761FF24261756F300CD4653 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1761FF23261756F300CD4653 /* Ingredient.swift */; };
 		17F1A8B92615AA340061F363 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1A8B82615AA340061F363 /* AppDelegate.swift */; };
 		17F1A8BB2615AA340061F363 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1A8BA2615AA340061F363 /* SceneDelegate.swift */; };
 		17F1A8BD2615AA340061F363 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1A8BC2615AA340061F363 /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1761FF23261756F300CD4653 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		17F1A8B52615AA340061F363 /* Mybar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mybar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17F1A8B82615AA340061F363 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17F1A8BA2615AA340061F363 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				17F1A8CF2615C2CD0061F363 /* customCell.swift */,
 				17F1A8D62615DFB70061F363 /* Api.swift */,
 				17F1A8D92615E1430061F363 /* Cocktail.swift */,
+				1761FF23261756F300CD4653 /* Ingredient.swift */,
 				17F1A8E2261623810061F363 /* FilterController.swift */,
 			);
 			path = Mybar;
@@ -153,6 +156,7 @@
 				17F1A8B92615AA340061F363 /* AppDelegate.swift in Sources */,
 				17F1A8DA2615E1430061F363 /* Cocktail.swift in Sources */,
 				17F1A8D02615C2CD0061F363 /* customCell.swift in Sources */,
+				1761FF24261756F300CD4653 /* Ingredient.swift in Sources */,
 				17F1A8D72615DFB70061F363 /* Api.swift in Sources */,
 				17F1A8BB2615AA340061F363 /* SceneDelegate.swift in Sources */,
 				17F1A8E3261623810061F363 /* FilterController.swift in Sources */,

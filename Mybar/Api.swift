@@ -33,21 +33,21 @@ class Api {
     {
         if (type == "cocktail" && search == "letter" && terms.count == 1)
         {
-            return self.urlParameters = "/search.php?f=\(terms)"
+            return self.urlParameters = "/search.php?f=\(terms.lowercased())"
         }
         
         else if(type == "cocktail" && search == "name" && terms.count >= 1)
         {
-            return self.urlParameters = "/search.php?s=\(terms)"
+            return self.urlParameters = "/search.php?s=\(terms.lowercased())"
         }
         
         else if(type == "ingredient" && terms.count >= 1)
         {
-            return self.urlParameters = "/search.php?i=\(terms)"
+            return self.urlParameters = "/search.php?i=\(terms.lowercased())"
         }
     }
     
-    func GetJson(callback: @escaping (Result<Cocktails, ApiError>) -> Void )
+    func GetJsonCocktail(callback: @escaping (Result<Cocktails, ApiError>) -> Void )
     {
         guard let url = URL(string: "\(baseUrl)\(urlParameters)") else { return }
         print (url)
@@ -57,6 +57,29 @@ class Api {
                     do {
                         let users = try! JSONDecoder().decode(Cocktails.self, from: data)
                         callback(.success(users))
+                    } catch{
+                        callback(.failure(.decoding))
+                    }
+                }
+            }
+            else{
+                callback(.failure(.decoding))
+            }
+
+        }.resume()
+    }
+    
+    func GetJsonIngredient(callback: @escaping (Result<Ingredients, ApiError>) -> Void )
+    {
+        guard let url = URL(string: "\(baseUrl)\(urlParameters)") else { return }
+        print (url)
+        session.dataTask(with: url) { (data, response, error) in
+            if let data = data {
+                DispatchQueue.main.async {
+                    do {
+                        let users = try! JSONDecoder().decode(Ingredients.self, from: data)
+                        callback(.success(users))
+                        print(users)
                     } catch{
                         callback(.failure(.decoding))
                     }

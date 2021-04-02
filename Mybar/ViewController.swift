@@ -15,7 +15,8 @@ class HomeController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var btnAlphabetique: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     var tb : [Cocktail]?
-    var terms: String = "d"
+    var tb2 : [ingredient]?
+    var terms: String = ""
     var type:String = "cocktail"
     var search:String = "letter"
     
@@ -39,24 +40,51 @@ class HomeController: UIViewController, UITableViewDataSource, UITableViewDelega
     func load_api() {
         if terms != ""{
             Api.instance.GetState(type: type, search: search, terms: terms)
-            Api.instance.GetJson{ [self] (result) in
-                switch result {
-                case .success(let response):
-                        self.tb = response.drinks
-                        self.tableView.reloadData()
-                case .failure(let error):
-                    print(error)
+            if type == "ingredient"
+            {
+                Api.instance.GetJsonIngredient{ [self] (result) in
+                    switch result {
+                    case .success(let response):
+                            self.tb2 = response.ingredients
+                            self.tableView.reloadData()
+                    case .failure(let error):
+                        print(error)
+                    }
                 }
             }
+            else if type == "cocktail"
+            {
+                Api.instance.GetJsonCocktail{ [self] (result) in
+                    switch result {
+                    case .success(let response):
+                            self.tb = response.drinks
+                            self.tableView.reloadData()
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            }
+
+
         }
     }
     
     @IBAction func actionCocktail(_ sender: Any) {
         self.type = "cocktail"
+        
+        if(self.btnAlphabetique.isHidden == true)
+        {
+            self.btnAlphabetique.isHidden = false
+        }
     }
     
     @IBAction func actionIngredient(_ sender: Any) {
         self.type = "ingredient"
+        
+        if(type == "ingredient")
+        {
+            self.btnAlphabetique.isHidden = true
+        }
     }
     
     @IBAction func btnName(_ sender: Any) {
@@ -70,21 +98,40 @@ class HomeController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return tb?.count ?? 0
+        if type == "cocktail"
+        {
+            return tb?.count ?? 0
+        }
+        else if (type == "ingredient"){
+            return tb2?.count ?? 0
+        }
+        
+        return 0
         
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomCell
-        let cocktail = self.tb?[indexPath.row]
-        cell.titleCocktail.text = cocktail?.strDrink
-        
-        let cocktailImageUrl = URL(string: (cocktail?.strDrinkThumb)!)!
-        let cocktailImageDate = try? Data(contentsOf: cocktailImageUrl)
-        cell.ImageCocktail.image = UIImage(data: cocktailImageDate!)
+
+        if type == "cocktail"
+        {   let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomCell
+            let cocktail = self.tb?[indexPath.row]
+            cell.titleCocktail.text = cocktail?.strDrink
+            
+            let cocktailImageUrl = URL(string: (cocktail?.strDrinkThumb)!)!
+            let cocktailImageDate = try? Data(contentsOf: cocktailImageUrl)
+            cell.ImageCocktail.image = UIImage(data: cocktailImageDate!)
+            return cell
+        }
+        else if type == "ingredient" {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomCell
+            print(tb2)
+            let ingredient = self.tb2?[indexPath.row]
+            cell.titleCocktail.text = ingredient?.strIngredient
+            return cell
+        }
+    
         return cell
-        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
