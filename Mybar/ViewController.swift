@@ -68,8 +68,15 @@ class HomeController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         if(search == "letter" && type == "cocktail" && terms.count > 1){
-            var dialogMessage = UIAlertController(title: "Attention", message: "Pour les recherches de cocktail avec plus d'une lettre, il faut cliquer sur le boutton name", preferredStyle: .alert)
-            self.present(dialogMessage, animated: true, completion: nil)
+                var dialogMessage = UIAlertController(title: "Attention", message: "Si vous voulez faire une recherche de cocktail avec plus d'une lettre, il faut cliquer sur le bouton name", preferredStyle: .alert)
+                
+                let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                    print("Ok button tapped")
+                 })
+                
+                dialogMessage.addAction(ok)
+                self.present(dialogMessage, animated: true, completion: nil)
+            
         }
     }
     
