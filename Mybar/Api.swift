@@ -47,6 +47,7 @@ class Api {
         }
     }
     
+    
     func GetJsonCocktail(callback: @escaping (Result<Cocktails, ApiError>) -> Void )
     {
         guard let url = URL(string: "\(baseUrl)\(urlParameters)") else { return }
