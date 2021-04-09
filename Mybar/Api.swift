@@ -7,20 +7,6 @@
 
 import Foundation
 
-enum ApiError: Error {
-    case decoding
-    case unknow
-    
-    var message : String {
-        switch self {
-        case .decoding:
-            return "Decoding error"
-        case .unknow:
-            return "Unkonw error"
-        }
-    }
-}
-
 class Api {
     let baseUrl = "https://www.thecocktaildb.com/api/json/v1/1"
     let session = URLSession(configuration: .default)
@@ -28,69 +14,57 @@ class Api {
     var urlParameters:String = ""
     static let instance = Api()
     
-    
-    func GetState(type: String, search:String, terms:String)
-    {
-        if (type == "cocktail" && search == "letter" && terms.count == 1)
-        {
-            return self.urlParameters = "/search.php?f=\(terms.lowercased())"
+    func listCocktailsByLetter(_ letter: String, completion: @escaping (Cocktails?) -> Void) {
+        guard let url = URL(string: "\(baseUrl)/search.php?f=\(letter)") else {
+            completion(nil)
+            return
         }
         
-        else if(type == "cocktail" && search == "name" && terms.count >= 1)
-        {
-            return self.urlParameters = "/search.php?s=\(terms.lowercased())"
+        let task = session.dataTask(with: url) { (data, response, error) in
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let cocktails = try decoder.decode(Cocktails.self, from: data)
+                    DispatchQueue.main.async { completion(cocktails) }
+                } catch (let error) {
+                    print(error)
+                    DispatchQueue.main.async { completion(nil) }
+                    print("Deserialisation failed")
+                }
+            } else {
+                DispatchQueue.main.async { completion(nil) }
+                print("No data")
+            }
+        }
+
+        task.resume()
+    }
+    
+    func listIngredientByLetter(_ name: String, completion: @escaping (Ingredients?) -> Void) {
+        guard let url = URL(string: "\(baseUrl)/search.php?i=\(name)") else {
+            completion(nil)
+            return
         }
         
-        else if(type == "ingredient" && terms.count >= 1)
-        {
-            return self.urlParameters = "/search.php?i=\(terms.lowercased())"
+        let task = session.dataTask(with: url) { (data, response, error) in
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let ingredients = try decoder.decode(Ingredients.self, from: data)
+                    DispatchQueue.main.async { completion(ingredients) }
+                } catch (let error) {
+                    print(error)
+                    DispatchQueue.main.async { completion(nil) }
+                    print("Deserialisation failed")
+                }
+            } else {
+                DispatchQueue.main.async { completion(nil) }
+                print("No data")
+            }
         }
-    }
-    
-    
-    func GetJsonCocktail(callback: @escaping (Result<Cocktails, ApiError>) -> Void )
-    {
-        guard let url = URL(string: "\(baseUrl)\(urlParameters)") else { return }
-        print (url)
-        session.dataTask(with: url) { (data, response, error) in
-            if let data = data {
-                DispatchQueue.main.async {
-                    do {
-                        let users = try! JSONDecoder().decode(Cocktails.self, from: data)
-                        callback(.success(users))
-                    } catch{
-                        callback(.failure(.decoding))
-                    }
-                }
-            }
-            else{
-                callback(.failure(.decoding))
-            }
 
-        }.resume()
+        task.resume()
     }
     
-    func GetJsonIngredient(callback: @escaping (Result<Ingredients, ApiError>) -> Void )
-    {
-        guard let url = URL(string: "\(baseUrl)\(urlParameters)") else { return }
-        print (url)
-        session.dataTask(with: url) { (data, response, error) in
-            if let data = data {
-                DispatchQueue.main.async {
-                    do {
-                        let users = try! JSONDecoder().decode(Ingredients.self, from: data)
-                        callback(.success(users))
-                        print(users)
-                    } catch{
-                        callback(.failure(.decoding))
-                    }
-                }
-            }
-            else{
-                callback(.failure(.decoding))
-            }
-
-        }.resume()
-    }
     
 }

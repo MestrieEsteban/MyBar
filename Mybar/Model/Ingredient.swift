@@ -7,9 +7,9 @@
 
 import Foundation
 struct Ingredients: Decodable {
-let ingredients: [ingredient]
+let ingredients: [Ingredient]
 }
 
-struct ingredient: Decodable {
+struct Ingredient: Decodable {
     let strIngredient:String
 }
