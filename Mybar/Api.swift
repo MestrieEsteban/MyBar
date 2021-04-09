@@ -40,31 +40,4 @@ class Api {
         task.resume()
     }
     
-    func listIngredientByLetter(_ name: String, completion: @escaping (Ingredients?) -> Void) {
-        guard let url = URL(string: "\(baseUrl)/search.php?i=\(name)") else {
-            completion(nil)
-            return
-        }
-        
-        let task = session.dataTask(with: url) { (data, response, error) in
-            if let data = data {
-                do {
-                    let decoder = JSONDecoder()
-                    let ingredients = try decoder.decode(Ingredients.self, from: data)
-                    DispatchQueue.main.async { completion(ingredients) }
-                } catch (let error) {
-                    print(error)
-                    DispatchQueue.main.async { completion(nil) }
-                    print("Deserialisation failed")
-                }
-            } else {
-                DispatchQueue.main.async { completion(nil) }
-                print("No data")
-            }
-        }
-
-        task.resume()
-    }
-    
-    
 }

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1709E932261EDCDB00FE957C /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1709E931261EDCDB00FE957C /* UIImageView+Extension.swift */; };
-		1761FF24261756F300CD4653 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1761FF23261756F300CD4653 /* Ingredient.swift */; };
+		176B366A2620902E00EA899F /* DetailsDrinkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176B36692620902E00EA899F /* DetailsDrinkController.swift */; };
 		17A2C7F526204041007E5B45 /* CustomDrinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A2C7F426204041007E5B45 /* CustomDrinkCell.swift */; };
 		17F1A8B92615AA340061F363 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1A8B82615AA340061F363 /* AppDelegate.swift */; };
 		17F1A8BB2615AA340061F363 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F1A8BA2615AA340061F363 /* SceneDelegate.swift */; };
@@ -22,7 +22,7 @@
 
 /* Begin PBXFileReference section */
 		1709E931261EDCDB00FE957C /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
-		1761FF23261756F300CD4653 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		176B36692620902E00EA899F /* DetailsDrinkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsDrinkController.swift; sourceTree = "<group>"; };
 		17A2C7F426204041007E5B45 /* CustomDrinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDrinkCell.swift; sourceTree = "<group>"; };
 		17F1A8B52615AA340061F363 /* Mybar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mybar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17F1A8B82615AA340061F363 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -66,7 +66,6 @@
 		1709E935261EE06300FE957C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1761FF23261756F300CD4653 /* Ingredient.swift */,
 				17F1A8D92615E1430061F363 /* Cocktail.swift */,
 			);
 			path = Model;
@@ -102,6 +101,7 @@
 				17F1A8C32615AA350061F363 /* LaunchScreen.storyboard */,
 				17F1A8C62615AA350061F363 /* Info.plist */,
 				17F1A8D62615DFB70061F363 /* Api.swift */,
+				176B36692620902E00EA899F /* DetailsDrinkController.swift */,
 			);
 			path = Mybar;
 			sourceTree = "<group>";
@@ -176,12 +176,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				176B366A2620902E00EA899F /* DetailsDrinkController.swift in Sources */,
 				17F1A8BD2615AA340061F363 /* HomeController.swift in Sources */,
 				17F1A8B92615AA340061F363 /* AppDelegate.swift in Sources */,
 				17F1A8DA2615E1430061F363 /* Cocktail.swift in Sources */,
 				17A2C7F526204041007E5B45 /* CustomDrinkCell.swift in Sources */,
 				1709E932261EDCDB00FE957C /* UIImageView+Extension.swift in Sources */,
-				1761FF24261756F300CD4653 /* Ingredient.swift in Sources */,
 				17F1A8D72615DFB70061F363 /* Api.swift in Sources */,
 				17F1A8BB2615AA340061F363 /* SceneDelegate.swift in Sources */,
 			);

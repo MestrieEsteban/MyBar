@@ -14,10 +14,7 @@ class HomeController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet weak var btnIngredient: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     var cocktails : [Cocktail?] = []
-    var currentCocktails: [Cocktail?] = []
-    var terms: String = ""
-    var type:String = "cocktail"
-    
+    var currentCocktails: [Cocktail?] = []    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +33,18 @@ class HomeController: UIViewController, UICollectionViewDataSource, UICollection
                 self.collectionView.reloadData()
             } else {
                 print("Could not fetch cocktails")
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let cell = sender as? UICollectionViewCell else { return }
+
+        if let index = self.collectionView?.indexPath(for: cell)?.row {
+            print(cocktails[index])
+
+            if let viewController = segue.destination as? DetailsDrinkController {
+                viewController.cocktails = cocktails[index]
             }
         }
     }
